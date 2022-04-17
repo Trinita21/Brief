@@ -7,41 +7,109 @@
     <title>Brief</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
+
   <body class="bg-[#CAF7E2] text-[#36393B]">
-    <h2 class="font-semibold text-4xl text-center py-4 px-4">
-      Brief: A Text Summarization App
-    </h2>
-    <div class="flex justify-center">
-      <form action="{{url_for('Summarization')}}" method="post" class="w-1/2">
-        <textarea
-          class="border border-[#36393B] bg-gray-200 p-3 w-full rounded"
-          name="data"
-          cols="30"
-          rows="10"
-          placeholder="Enter your text here"
-          required="required"
-        ></textarea>
-        <button
-          class="border border-1 border-black rounded px-4 py-2 bg-gray-200 font-semibold hover:bg-gray-400"
-          type="reset"
+    <nav>
+      <div class="container mx-auto">
+        <div class="flex items-center justify-between px-4 py-3">
+          <div class="flex items-center">
+            <a href="/" class="text-gray-900">
+              <svg
+                class="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z"
+                ></path>
+                <path
+                  fill-rule="evenodd"
+                  d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </a>
+            <a href="/" class="text-gray-900">
+              <h1 class="text-2xl font-bold">Brief</h1>
+            </a>
+          </div>
+          <div class="flex items-center">
+            <a
+              href="https://github.com/Trinita21"
+              class="text-gray-900 text-lg px-1 mx-1 font-bold hover:underline hover:text-blue-600"
+            >
+              Github
+            </a>
+            <a
+              href="https://trinita21.github.io/"
+              class="text-gray-900 text-lg px-1 mx-1 font-bold hover:underline hover:text-blue-600"
+            >
+              About Me
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <h2 class="text-3xl font-bold text-center py-4 px-4">
+        Brief: A Text Summarization App
+      </h2>
+      <div class="flex justify-center">
+        <form
+          action="{{url_for('Summarization')}}"
+          method="post"
+          class="w-full mx-1 md:w-1/2"
         >
-          Clear
-        </button>
-        <button
-          class="border border-blue-800 rounded px-3 py-2 bg-blue-600 text-white font-semibold hover:bg-blue-800"
-          type="submit"
+          <textarea
+            id="text-area"
+            class="border border-[#36393B] bg-gray-200 p-3 w-full rounded"
+            name="data"
+            cols="30"
+            rows="10"
+            placeholder="Enter your text here"
+            required="required"
+          ></textarea>
+          <button
+            class="border border-1 border-black rounded px-4 py-2 bg-gray-200 font-semibold hover:bg-gray-400"
+            type="reset"
+          >
+            Clear
+          </button>
+          <button
+            id="example-text"
+            class="border border-1 border-blue-600 bg-[#CAF7E2] rounded px-4 py-2 font-semibold hover:bg-blue-600 hover:text-white text-blue-600"
+            type="button"
+          >
+            Example Text
+          </button>
+          <button
+            class="border border-blue-800 rounded px-3 py-2 bg-blue-600 text-white font-semibold hover:bg-blue-800"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+
+      {% if (result) %}
+      <div class="flex flex-col items-center">
+        <h3 class="font-semibold text-2xl py-4 px-4">Summarized Text</h3>
+        <div
+          class="border border-[#36393B] bg-gray-200 p-3 rounded w-full mx-2 md:w-1/2"
         >
-          Submit
-        </button>
-      </form>
-    </div>
-    <h3 class="font-semibold text-2xl text-center py-4 px-4">
-      Summarized Text
-    </h3>
-    {% if (result) %}
-    <div class="border border-[#36393B] bg-gray-200 p-3 w-full rounded">
-      <p>{{result[0].summary_text}}</p>
-    </div>
-    {% endif %}
+          <p>{{result[0].summary_text}}</p>
+        </div>
+      </div>
+      {% endif %}
+    </main>
+    <script>
+      const textArea = document.getElementById("text-area");
+      const exampleText_btn = document.getElementById("example-text");
+      exampleText_btn.addEventListener("click", () => {
+        textArea.value =
+          "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 Englishto-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.";
+      });
+    </script>
   </body>
 </html>

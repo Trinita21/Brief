@@ -14,8 +14,11 @@ def index():
 def Summarization():
     if request.method == 'POST':
         data = request.form['data']
-        min = 20
-        max = 1000
+        min = 50
+        max = 250
+
+        # max=int(request.form['max'])
+        # min=max//4
 
         payload = {
             "inputs": data,
@@ -26,7 +29,6 @@ def Summarization():
         API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
         response = requests.post(API_URL, headers=headers, json=payload)
         output = response.json()
-        print(len(output[0]["summary_text"].split(" ")))
         return render_template('index.html', result=output)
     else:
         return render_template('index.html')
