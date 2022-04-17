@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brief</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-[#CAF7E2] text-[#36393B]">
+    <h2 class="font-semibold text-4xl text-center py-4 px-4">
+      Brief: A Text Summarization App
+    </h2>
+    <div class="flex justify-center">
+      <form action="{{url_for('Summarization')}}" method="post" class="w-1/2">
+        <textarea
+          class="border border-[#36393B] bg-gray-200 p-3 w-full rounded"
+          name="data"
+          cols="30"
+          rows="10"
+          placeholder="Enter your text here"
+          required="required"
+        ></textarea>
+        <button
+          class="border border-1 border-black rounded px-4 py-2 bg-gray-200 font-semibold hover:bg-gray-400"
+          type="reset"
+        >
+          Clear
+        </button>
+        <button
+          class="border border-blue-800 rounded px-3 py-2 bg-blue-600 text-white font-semibold hover:bg-blue-800"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+    <h3 class="font-semibold text-2xl text-center py-4 px-4">
+      Summarized Text
+    </h3>
+    {% if (result) %}
+    <div class="border border-[#36393B] bg-gray-200 p-3 w-full rounded">
+      <p>{{result[0].summary_text}}</p>
+    </div>
+    {% endif %}
+  </body>
+</html>
